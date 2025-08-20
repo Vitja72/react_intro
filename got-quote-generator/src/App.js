@@ -12,6 +12,11 @@ import QuoteCard from './QuoteCard';
     { id: 8, quote: "Valar Morghulis.", character: "Jaqen H'ghar", epic: true },
   ];
 
+function handleLike(charakterName) {
+  console.log(`${charakterName}Zitat wurde geliked!`);
+};
+
+
 
 function App() {
   return (
@@ -28,14 +33,16 @@ function App() {
             characterName={q.character}
             isQuoteEpic={q.epic}
           > 
-            <button style={{
-              backgroundColor: '#4CAF50',
-              color: 'white',
-              padding: '8px 15px',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              marginTop: '10px'
+            <button 
+              onClick={() => handleLike(q.character)}
+              style={{
+                backgroundColor: '#f4b747ff',
+                color: 'white',
+                padding: '8px 15px',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                marginTop: '10px'
             }}>
             Like!
             </button>
