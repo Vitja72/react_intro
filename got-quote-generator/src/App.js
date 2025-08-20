@@ -12,7 +12,6 @@ import QuoteCard from './QuoteCard';
     { id: 8, quote: "Valar Morghulis.", character: "Jaqen H'ghar", epic: true },
   ];
 
- 
 
 function App() {
   return (
@@ -24,13 +23,23 @@ function App() {
       <main>
         {gotQuotes.map(q => (
           <QuoteCard
-          key={q.id}
-          quoteText={q.quote}
-          characterName={q.character}
-          isQuoteEpic={q.epic}
-          quoteStyle={quoteStyle}
-          characterStyle={characterStyle}
-          />
+            key={q.id}
+            quoteText={q.quote}
+            characterName={q.character}
+            isQuoteEpic={q.epic}
+          > 
+            <button style={{
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              padding: '8px 15px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              marginTop: '10px'
+            }}>
+            Like!
+            </button>
+          </QuoteCard>
         ))}
       </main>
     </div>
