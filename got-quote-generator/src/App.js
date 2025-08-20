@@ -12,21 +12,7 @@ import QuoteCard from './QuoteCard';
     { id: 8, quote: "Valar Morghulis.", character: "Jaqen H'ghar", epic: true },
   ];
 
-  const quoteStyle = {
-    fontStyle: 'italic',
-    color: '#f89a03ff',
-    fontSize: '1.5em',
-    marginBottom: '10px',
-    borderLeft: '4px solid #f89a03ff',
-    paddingLeft: '15px'
-  };
-
-  const characterStyle = {
-    fontSize: '0.8em',
-    color: '#434343ff',
-    marginTop: '5px',
-    display: 'block'
-  };
+ 
 
 function App() {
   return (
