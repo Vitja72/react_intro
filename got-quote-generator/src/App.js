@@ -1,6 +1,7 @@
 import './App.css';
+import QuoteCard from './QuoteCard';
 
-const gotQuots = [
+  const gotQuotes = [
     { id: 1, quote: "Der Winter naht.", character: "Ned Stark", epic: true },
     { id: 2, quote: "Ein Lannister begleicht stets seine Schulden.", character: "Tyrion Lannister", epic: false },
     { id: 3, quote: "Wenn du das Spiel der Throne spielst, gewinnst du oder du stirbst. Es gibt keinen Mittelweg.", character: "Cersei Lannister", epic: true },
@@ -10,41 +11,33 @@ const gotQuots = [
     { id: 7, quote: "Hodor!", character: "Hodor", epic: false },
     { id: 8, quote: "Valar Morghulis.", character: "Jaqen H'ghar", epic: true },
   ];
-const quoteStyle = {
-  frontStyle: 'italic',
-  color: '#320679ff',
-  frontSize: '1.5em',
-  borderLeft: '4px solid #0c29ceff',
-  paddingLeft: '15px',
-};
 
-const characterStyle = {
+  const quoteStyle = {
+    fontStyle: 'italic',
+    color: '#f89a03ff',
+    fontSize: '1.5em',
+    marginBottom: '10px',
+    borderLeft: '4px solid #f89a03ff',
+    paddingLeft: '15px'
+  };
+
+  const characterStyle = {
     fontSize: '0.8em',
-    color: '#fc0303ff',
+    color: '#434343ff',
     marginTop: '5px',
     display: 'block'
   };
-
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-       <h1>Game of Thrones Zitat-Generator</h1>
-       <p>Ein Ort für Weisheit (und Sarkasmus) aus Westeros.</p>
-       </header>
-       <main>
-      {gotQuotes.map(q => (
-              <blockquote key={q.id} style={quoteStyle}>"{q.quote}"
-                <footer style={characterStyle}> 
-                  - {q.character} 
-                  {q.epic && <span style={{ marginLeft: '10px' }}>🌟</span>}
-                </footer>
-              </blockquote>
-       ))}
-       
-       </main>
-      
+        <h1>Game of Thrones Zitat-Generator</h1>
+        <p>Ein Ort für Weisheit (und Sarkasmus) aus Westeros.</p>
+      </header>
+      <main>
+        <QuoteCard />
+      </main>
     </div>
   );
 }
