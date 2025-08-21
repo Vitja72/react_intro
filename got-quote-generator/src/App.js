@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import QuoteCard from './QuoteCard';
 
 const gotQuotes = [
@@ -25,10 +25,41 @@ function App() {
   const currentQuote = gotQuotes[currentQuoteIndex];
 
   const [showEpicMessage, setShowEpicMessage] = useState(true);
-
   function toggleEpicMessage() {
     setShowEpicMessage(!showEpicMessage);
   };
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [fetchedQuote, setFetchedQuote] = useState(null);
+
+    useEffect(() => {
+      const fetchQuote = async () => {
+        setIsLoading(true);
+        setError(null);
+
+        try {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          // if ( Math.random() > 0.7) {
+          //   throw new Error('Fehler beim Abrufen des Zitats');
+          // }
+          const selectedQuote = gotQuotes[currentQuoteIndex];
+          setFetchedQuote(selectedQuote);
+
+        } catch (err) {
+          console.error("Fehler beim Abrufen des Zitats", err);
+          setError("Fehler beim Laden des Zitats. Bitte versuchen Sie es erneut.");
+          
+        } finally {
+          setIsLoading(false);
+          
+        }
+      }   
+      
+      fetchQuote();
+    }, [currentQuoteIndex, gotQuotes]);
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -36,14 +67,33 @@ function App() {
         <p>Ein Ort für Weisheit (und Sarkasmus) aus Westeros.</p>
       </header>
       <main>
-        <QuoteCard 
-          key={currentQuote.id}
-          quoteText={currentQuote.quote}
-          characterName={currentQuote.character}
-          isQuoteEpic={currentQuote.epic}
-        />
 
-        {currentQuote.epic && (
+        {isLoading && ( 
+          <p style={{ color: '#ccc', fontSize: '1.2em' }}> 
+          Lade Zitat...<span role="img" aria-label="loading spinner">⏳</span>
+          </p>
+        )}
+
+        {error && (
+          <p style={{ color: '#ff6347', fontSize: '1.2em' }}>
+            Fehler: {error} <span role="img" aria-label="error icon">❌</span>
+          </p>
+        )}
+
+        {!isLoading && !error && fetchedQuote && (
+
+        
+
+        <QuoteCard 
+          key={fetchedQuote.id}
+          quoteText={fetchedQuote.quote}
+          characterName={fetchedQuote.character}
+          isQuoteEpic={fetchedQuote.epic}
+        />
+        )}
+
+
+        {currentQuoteIndex !== null && fetchedQuote && fetchedQuote.epic && (
           <button 
               onClick={toggleEpicMessage}
               style={{
@@ -62,7 +112,7 @@ function App() {
           </button>
         )}
 
-        {currentQuote.epic && showEpicMessage && (
+        {currentQuoteIndex !== null && fetchedQuote && fetchedQuote.epic && showEpicMessage && (
           <p style={{ color: '#F8C471', fontStyle: 'italic', fontSize: '1.2em' }}>
             Das ist ein wahrlich episches Zitat 👑
           </p>
